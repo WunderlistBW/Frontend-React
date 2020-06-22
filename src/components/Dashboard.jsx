@@ -11,6 +11,7 @@ const Dashboard = () => {
 // what other slices of state do we need to store here? 
 
 const [taskList, setTaskList] = useState([])
+const [refresh, setRefresh] = useState(true)
 
 
 // axios request to get user's taskList - set to state 
@@ -19,15 +20,18 @@ useEffect(() => {
     .get('/api/tasks')
     .then(res => {
         console.log(res);
+        // add setTaskList
     })
     .catch(err => {
         console.log(err); 
     })
-})
+    .finally(setRefresh(false))
+}, [refresh])
 
     return (
         <>
-        <TaskContext.Provider value={{ taskList }} >
+        <h1>Your Tasks</h1>
+        <TaskContext.Provider value={{ taskList, setRefresh }} >
          <TaskList />
         </TaskContext.Provider>
 

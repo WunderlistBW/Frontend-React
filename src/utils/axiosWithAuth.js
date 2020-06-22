@@ -9,7 +9,7 @@ return axios.create({
     headers: {
       authorization: token
     },
-    baseURL: 'http://localhost:5000', //change this once we have endpoints 
+    baseURL: 'https://wunderlist-api-2020.herokuapp.com', 
     
 }); 
 }

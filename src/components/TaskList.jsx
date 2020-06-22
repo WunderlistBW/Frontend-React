@@ -7,32 +7,39 @@ import { TaskContext } from '../contexts/TaskContext';
 
 const TaskList = () => {
 
-    // need to add mark as complete functionality + clear completed functionality 
+    // need to add mark as complete + clear completed functionality 
+    // need to add search functionality 
 
-    const { taskList } = useContext(TaskContext); 
+    const { taskList, setRefresh } = useContext(TaskContext); 
 
-
-    const deleteTask = (e, task) => {
-        e.preventDefault();
+    const [editing, setEditing] = useState(false);
+    const [taskToEdit, setTaskToEdit] = useState({}); // update this object with correct shape 
+    
+    const deleteTask = task => {
         axiosWithAuth()
         .delete(`/api/tasks/${task.id}`) 
         .then(res => { 
-          console.log(res);  
+          console.log(res); 
+          setRefresh(true);  
         })
         .catch(err => {
           console.log(err); 
         })
     }
     
+    const editTask = task => {
+        setEditing(true);
+        setTaskToEdit(task);
+      };
 
-    // see bubbles sprint for model - need to add editing state +  
 
-    const handleUpdate = (e, task) => {
+    const saveUpdate = e => {
         e.preventDefault(); 
         axiosWithAuth()
-            .put(`/api/tasks/${task.id}`,  ) //need to add item to be updated in here 
+            .put(`/api/tasks/${taskToEdit.id}`, taskToEdit  )
             .then(res => {
                 console.log(res);
+                setRefresh(true); 
             }) 
             .catch(err => {
                 console.log(err); 
@@ -44,15 +51,17 @@ const TaskList = () => {
         {
             taskList.map(task => {
 
-            // build this out after looking at structure of data
-            // button invoking deleteTask 
-            // button routing to UpdateTask 
-
                 return <div> 
 
-                <button onClick={deleteTask}> Delete </button>
+                <button onClick={(e) => {e.preventDefault(); deleteTask(task)}}> Delete </button>
 
-                <button onClick={handleUpdate}> Update</button> 
+                <button onClick={() => {editTask(task)}}> Update </button> 
+
+                {editing && (
+                    <form onSubmit={saveUpdate}>
+                        {/* use task form as model for this form - make sure to match shape of object used above for taskToEdit */}
+                    </form> 
+                )}
 
                 </div>
                
