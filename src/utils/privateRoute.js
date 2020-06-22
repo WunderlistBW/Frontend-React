@@ -8,10 +8,10 @@ const PrivateRoute = ({component: Component, ...rest}) => {
     <Route {...rest} 
     render={props => {
       if(token) {
-        // return component 
+        // return component we want to render (dashboard)
         return <Component {...props} />; 
       } else {
-        // redirect user to login 
+        // redirect user to login  if there is no token
         return <Redirect to="/login" />; 
       }
     }}/>
