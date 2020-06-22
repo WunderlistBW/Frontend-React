@@ -7,7 +7,6 @@ const Dashboard = () => {
 
 // what state do we need to store here? 
     // 1. taskList
-    // 2. 
 
 // what functions do we need to build/use here?
     // 1.
