@@ -1,4 +1,7 @@
 import React from "react";
+import Button from "../stylingComponents/Button";
+import LoginFormStyling from "../stylingComponents/LoginFormStyling";
+
 
 export default function Login(props) {
     const {
@@ -10,35 +13,31 @@ export default function Login(props) {
     } = props
 
     return (
-        <form onSubmit={onSubmit}>
+        <LoginFormStyling className="form-horizontal" onSubmit={onSubmit}>
             <div className="errors">
                 <div>{errors.username}</div>
                 <div>{errors.password}</div>
             </div>
-            <div className="userName">
-                <h1>Sign In:</h1>
-                <label>Username:
-                    <input 
-                        value={values.username}
-                        type="username"
-                        name="username"
-                        onChange={onInputChange}
+
+            <div className="form-group">
+                <label className="control-label col-sm-2" for="username">Username:</label>
+                <div className="col-sm-5">
+                    <input type="text" className="form-control" id="username" placeholder="Enter username" value={values.username} name="username" onChange={onInputChange}/>
+                </div>
+              
+            </div>
+            <div className="form-group">
+                <label className="control-label col-sm-2" for="pwd">Password:</label>
+                <div className="col-sm-5">
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" value={values.password} name="password" onChange={onInputChange}
                     />
-                </label>
+                </div>
             </div>
-            <div className="password">
-                <label>Password:
-                    <input 
-                    value={values.password}
-                    type="password"
-                    name="password"
-                    onChange={onInputChange}
-                    />
-                </label>
+            <div className="form-group">
+                <div className="col-sm-offset-2 col-sm-5">
+                    <Button type="submit" className="btn btn-default" disabled={disabled}>Sign In</Button>
+                </div>
             </div>
-            <div className="btn">
-                <button disabled={disabled}>Sign In</button>
-            </div>
-        </form>
+        </LoginFormStyling>
     )
 }
