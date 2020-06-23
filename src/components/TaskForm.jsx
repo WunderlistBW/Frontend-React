@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Modal from "react-modal";
+import axiosWithAuth from '../utils/axiosWithAuth'; 
+import { TaskContext } from '../contexts/TaskContext'; 
 
 function TaskForm() {
+
+    const { setRefresh } = useContext(TaskContext);
+
     const [formState, setFormState] = useState({
         name: "",
-        dueDate: null,
-        isRecurring: false,
+        endOn: null,
+        isRepeated: false,
         days: null,
-        isComplete: false,
     });
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -30,21 +34,23 @@ function TaskForm() {
 
     const formSubmit = (e) => {
         e.preventDefault();
-        axios
-            .post("https://reqres.in/api/users", formState)
+        console.log(formState); 
+        axiosWithAuth()
+            .post("/api/tasks", formState)
             .then((res) => {
                 setPost(res.data); // get just the form data from the REST api
                 console.log("success", post);
                 // reset form if successful
                 setFormState({
                     name: "",
-                    dueDate: "",
-                    isRecurring: false,
+                    endOn: "",
+                    isRepeated: false,
                     days: null,
                 });
                 setModalIsOpen(false);
+                setRefresh(true); 
             })
-            .catch((err) => console.log(err.response));
+            .catch((err) => {console.log(err.response); console.log(formState)});
     };
 
     return (
@@ -65,12 +71,12 @@ function TaskForm() {
                             onChange={inputChange}
                         />
                     </label>
-                    <label htmlFor='isRecurring'>
-                        Recurring
+                    <label htmlFor='isRepeated'>
+                        Repeated
                         <input
                             type='checkbox'
-                            name='isRecurring'
-                            value={formState.isRecurring}
+                            name='isRepeated'
+                            value={formState.isRepeated}
                             onChange={inputChange}
                         />
                     </label>
@@ -86,12 +92,12 @@ function TaskForm() {
                         </select>
                     </label>
 
-                    <label htmlFor='dueDate'>
+                    <label htmlFor='endOn'>
                         Due Date
                         <input
                             type='date'
-                            name='dueDate'
-                            value={formState.dueDate || ""}
+                            name='endOn'
+                            value={formState.endOn || ""}
                             onChange={inputChange}
                         />
                     </label>
@@ -99,7 +105,7 @@ function TaskForm() {
                     <button>Create Task</button>
                 </form>
             </Modal>
-            <pre>{JSON.stringify(post, null, 2)}</pre>
+            {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
         </div>
     );
 }
