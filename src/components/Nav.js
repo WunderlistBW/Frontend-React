@@ -7,7 +7,7 @@ import ATags from "../stylingComponents/ATags";
 export default function Nav() {
     return (
     <Div class="navigation">
-        <H2>WunderList</H2>
+        <H2>wunderlist</H2>
         <NavStyling>
             <ATags href="#home">Home</ATags>
             <ATags href="#about">About Us</ATags>
