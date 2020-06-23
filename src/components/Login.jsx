@@ -18,11 +18,13 @@ export default function Login(props) {
                 <div>{errors.username}</div>
                 <div>{errors.password}</div>
             </div>
+
             <div className="form-group">
                 <label className="control-label col-sm-2" for="username">Username:</label>
                 <div className="col-sm-5">
                     <input type="text" className="form-control" id="username" placeholder="Enter username" value={values.username} name="username" onChange={onInputChange}/>
                 </div>
+              
             </div>
             <div className="form-group">
                 <label className="control-label col-sm-2" for="pwd">Password:</label>
