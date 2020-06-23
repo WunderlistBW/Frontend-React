@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "../stylingComponents/Button"
+
 
 export default function Login(props) {
     const {
@@ -37,7 +39,7 @@ export default function Login(props) {
                 </label>
             </div>
             <div className="btn">
-                <button disabled={disabled}>Sign In</button>
+                <Button disabled={disabled}>Sign In</Button>
             </div>
         </form>
     )
