@@ -1,39 +1,35 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 
-import axiosWithAuth from '../utils/axiosWithAuth'; 
-
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 const Dashboard = () => {
-
-// what state do we need to store here? 
+    // what state do we need to store here?
     // 1. taskList
-    // 2. 
 
-// what functions do we need to build/use here?
+    // what functions do we need to build/use here?
     // 1.
 
-// axios request to get user task lists - set to state 
-useEffect(() => {
-    axiosWithAuth()
-    .get()
-    .then(res => {
-        console.log(res);
-    })
-    .catch(err => {
-        console.log(err); 
-    })
-})
+    // axios request to get user task lists - set to state
+    useEffect(() => {
+        axiosWithAuth()
+            .get()
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    });
 
     return (
         <>
+            <button>Add Task</button>
 
-        {/* render task list component - could build it directly here - but thinking we should pop it out and build it in it's own component */}
+            {/* render task list component - could build it directly here - but thinking we should pop it out and build it in it's own component */}
 
-        {/* render task form component */}
-        
+            {/* render task form component */}
         </>
-    ) 
-}
+    );
+};
 
-
-export default Dashboard
+export default Dashboard;

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
 import * as Yup from "yup";
 import formSchema from "./components/formSchema";
 import TaskForm from "./components/TaskForm";
+
+import PrivateRoute from "./utils/privateRoute";
+import Dashboard from "./components/Dashboard";
 
 const initialFormValues = {
     userName: "",
@@ -64,8 +67,21 @@ export default function App() {
 
     return (
         <div className='App'>
+            <ul>
+                <li>
+                    <Link to='/login'>Login</Link>
+                </li>
+                {/* add register */}
+                <li>
+                    <Link to='/dashboard'>Dashboard</Link>
+                </li>
+            </ul>
             <Switch>
-                <Route path='/login'>
+                <PrivateRoute exact path='/dashboard'>
+                    <Dashboard />
+                </PrivateRoute>
+
+                {/* <Route path='/login'>
                     <Login
                         values={formValues}
                         onSubmit={onSubmit}
@@ -73,9 +89,11 @@ export default function App() {
                         disabled={disabled}
                         errors={formErrors}
                     />
-                    <TaskForm />
-                </Route>
+                </Route> */}
+                {/* add register */}
             </Switch>
+
+            <TaskForm />
         </div>
     );
 }
