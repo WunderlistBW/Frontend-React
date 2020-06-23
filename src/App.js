@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import {SignUpForm} from './components/Signup'; 
 import * as Yup from "yup";
 import formSchema from "./components/formSchema";
+import TaskForm from "./components/TaskForm";
 
 import PrivateRoute from "./utils/PrivateRoute";
 import Dashboard from './components/Dashboard'; 
@@ -29,32 +30,34 @@ export default function App() {
   const [formErrors, setFormErrors] = useState(initalFormErrors);
   const [disabled, setDisabled] = useState(false);
 
-  const onInputChange = (event) => {
-    const { name, value } = event.target;
 
-    Yup.reach(formSchema, name)
-      .validate(value)
-      .then(() => {
-        setFormErrors({
-          ...formErrors,
-          [name]: "",
+    const onInputChange = (event) => {
+        const { name, value } = event.target;
+
+        Yup.reach(formSchema, name)
+            .validate(value)
+            .then(() => {
+                setFormErrors({
+                    ...formErrors,
+                    [name]: "",
+                });
+            })
+            .catch((err) => {
+                setFormErrors({
+                    ...formErrors,
+                    [name]: err.errors[0],
+                });
+            });
+
+        setFormValues({
+            ...formValues,
+            [name]: value,
         });
-      })
-      .catch((err) => {
-        setFormErrors({
-          ...formErrors,
-          [name]: err.errors[0],
-        });
-      });
+    };
 
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-  };
+    const onSubmit = (event) => {
+        event.preventDefault();
 
-  const onSubmit = (event) => {
-    event.preventDefault();
 
     const newLogin = {
       username: formValues.username.trim(),
@@ -74,12 +77,14 @@ export default function App() {
 
   };
 
-  useEffect(() => {
-    formSchema.isValid(formValues).then((valid) => {
-      setDisabled(!valid);
-    });
-  }, [formValues]);
 
+    useEffect(() => {
+        formSchema.isValid(formValues).then((valid) => {
+            setDisabled(!valid);
+        });
+    }, [formValues]);
+
+  
   return (
     <div className="App">
       <ul>
