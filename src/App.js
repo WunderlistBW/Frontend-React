@@ -77,9 +77,7 @@ export default function App() {
       </ul>
       <Switch>
 
-        <PrivateRoute exact path="/dashboard">
-          <Dashboard />
-        </PrivateRoute>
+        <PrivateRoute path="/dashboard" component={Dashboard} />
 
         <Route path="/login">
           <Login

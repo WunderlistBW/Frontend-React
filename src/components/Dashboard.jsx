@@ -2,33 +2,40 @@ import React, {useState, useEffect} from 'react';
 
 import axiosWithAuth from '../utils/axiosWithAuth'; 
 
+import TaskList from './TaskList'; 
+import { TaskContext } from '../contexts/TaskContext'; 
+
 
 const Dashboard = () => {
 
-// what state do we need to store here? 
-    // 1. taskList
+// what other slices of state do we need to store here? 
 
-// what functions do we need to build/use here?
-    // 1.
+const [taskList, setTaskList] = useState([])
+const [refresh, setRefresh] = useState(true)
 
-// axios request to get user task lists - set to state 
+
+// axios request to get user's taskList - set to state 
 useEffect(() => {
     axiosWithAuth()
-    .get()
+    .get('/api/tasks')
     .then(res => {
         console.log(res);
+        // add setTaskList
     })
     .catch(err => {
         console.log(err); 
     })
-})
+    .finally(setRefresh(false))
+}, [refresh])
 
     return (
         <>
+        <h1>Your Tasks</h1>
+        <TaskContext.Provider value={{ taskList, setRefresh }} >
+         <TaskList />
+        </TaskContext.Provider>
 
-        {/* render task list component - could build it directly here - but thinking we should pop it out and build it in it's own component */}
-
-        {/* render task form component */}
+        {/* render TaskForm component */}
         
         </>
     ) 
