@@ -6,8 +6,8 @@ function TaskForm() {
     const [formState, setFormState] = useState({
         name: "",
         dueDate: null,
-        isRecurring: false,
-        days: null,
+        isRepeated: false,
+        repeatUntil: null,
         isComplete: false,
     });
 
