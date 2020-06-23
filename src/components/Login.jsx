@@ -21,7 +21,7 @@ export default function Login(props) {
             <div className="form-group">
                 <label className="control-label col-sm-2" for="username">Username:</label>
                 <div className="col-sm-5">
-                    <input type="text" className="form-control" id="username" placeholder="Enter username" value={values.username} name="userName" onChange={onInputChange}/>
+                    <input type="text" className="form-control" id="username" placeholder="Enter username" value={values.username} name="username" onChange={onInputChange}/>
                 </div>
             </div>
             <div className="form-group">
