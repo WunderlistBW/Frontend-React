@@ -21,7 +21,7 @@ export default function Login(props) {
                     <input 
                         value={values.username}
                         type="username"
-                        name="userName"
+                        name="username"
                         onChange={onInputChange}
                     />
                 </label>

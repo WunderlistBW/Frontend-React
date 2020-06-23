@@ -21,10 +21,11 @@ export const SignUpForm = () => {
       .then((response) => {
         console.log('response from POST request in SIGNUP form', response);
         localStorage.setItem('token', response.data.token);
-        history.push('/loggedInPage');
+        history.push('/dashboard');
       })
       .catch((error) => console.log('Error from POST in SIGNUP form', error));
     setSignUpInput({
+      username: '', 
       firstname: '',
       lastname: '',
       email: '',
@@ -35,6 +36,16 @@ export const SignUpForm = () => {
   return (
     <form className="login" onSubmit={handleSubmit}>
       <h1>Please Sign Up Here</h1>
+      <label>
+        Enter Username:
+        <input
+          type="text"
+          name="username"
+          placeholder="enter username here"
+          value={signUpInput.username || ''}
+          onChange={handleChange}
+        />
+      </label>
       <label>
         Enter First Name:
         <input
