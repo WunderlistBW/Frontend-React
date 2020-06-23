@@ -1,24 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, Link, useHistory } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
+import {SignUpForm} from './components/Signup'; 
 import * as Yup from "yup";
 import formSchema from "./components/formSchema";
 
 import PrivateRoute from "./utils/PrivateRoute";
 import Dashboard from './components/Dashboard'; 
+import axiosWithAuth from './utils/axiosWithAuth'; 
 
 const initialFormValues = {
-  userName: "",
+  username: "",
   password: "",
 };
 
 const initalFormErrors = {
-  userName: "",
+  username: "",
   password: "",
 };
 
 export default function App() {
+
+  const { push } = useHistory(); 
+
   // const [loginInfo, setLoginInfo] = useState([])
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initalFormErrors);
@@ -52,10 +57,21 @@ export default function App() {
     event.preventDefault();
 
     const newLogin = {
-      userName: formValues.userName.trim(),
+      username: formValues.username.trim(),
       password: formValues.password.trim(),
     };
-    // axios requst goes here, using newLogin
+  
+    axiosWithAuth()
+    .post('/api/auth/login', newLogin)
+    .then(res => {
+      window.localStorage.setItem("token", res.data.token);  
+      push('/dashboard')
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+
   };
 
   useEffect(() => {
@@ -70,7 +86,9 @@ export default function App() {
         <li>
           <Link to="/login">Login</Link>
         </li>
-        {/* add register */}
+        <li>
+          <Link to="/signup">Signup</Link>
+        </li>
         <li>
           <Link to="/dashboard">Dashboard</Link>
         </li>
@@ -87,6 +105,9 @@ export default function App() {
             disabled={disabled}
             errors={formErrors}
           />
+        </Route>
+        <Route path="/signup">
+          <SignUpForm />
         </Route>
         {/* add register */}
       </Switch>
