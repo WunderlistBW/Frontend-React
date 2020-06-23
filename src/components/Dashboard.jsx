@@ -4,9 +4,7 @@ import React, {useState, useEffect} from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth'; 
 import TaskList from './TaskList'; 
 import { TaskContext } from '../contexts/TaskContext'; 
-
-
-import axiosWithAuth from "../utils/axiosWithAuth";
+import TaskForm from '../components/TaskForm'; 
 
 const Dashboard = () => {
 
@@ -19,7 +17,7 @@ useEffect(() => {
     .get('/api/tasks')
     .then(res => {
         console.log(res);
-        setTaskList(res.data); //check on this once we have real data 
+        setTaskList(res.data); 
     })
     .catch(err => {
         console.log(err); 
@@ -34,8 +32,9 @@ useEffect(() => {
          <TaskList />
         </TaskContext.Provider>
 
-        {/* render TaskForm component */}
-        
+        <TaskContext.Provider value={{ setRefresh }}>
+        <TaskForm />
+        </TaskContext.Provider>
         </>
     );
 };
