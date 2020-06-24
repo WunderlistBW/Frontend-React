@@ -2,16 +2,16 @@ import React from "react";
 import Div from "../stylingComponents/Div";
 import H2 from "../stylingComponents/H2";
 import NavStyling from "../stylingComponents/NavStyling";
-import ATags from "../stylingComponents/ATags";
+import NavLink from "../stylingComponents/NavLink";
 
 export default function Nav() {
     return (
     <Div class="navigation">
         <H2>wunderlist</H2>
         <NavStyling>
-            <ATags href="#home">Home</ATags>
-            <ATags href="#about">About Us</ATags>
-            <ATags href="#contact">Contact</ATags>
+            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/signup">Signup</NavLink>
+            <NavLink to="/dashboard">Dashboard</NavLink>
         </NavStyling>
     </Div>
     )
