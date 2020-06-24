@@ -4,6 +4,10 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 
 import { TaskContext } from "../contexts/TaskContext";
 
+import Task from './Task'; 
+
+import './component.css'; 
+
 const TaskList = () => {
   // need to add mark as complete + clear completed functionality
   // need to add search functionality
@@ -13,6 +17,7 @@ const TaskList = () => {
   const [editing, setEditing] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState({}); // update this object with correct shape
   const [searchInput, setSearchInput] = useState("");
+
 
   const deleteTask = (task) => {
     axiosWithAuth()
@@ -49,6 +54,8 @@ const TaskList = () => {
     setSearchInput(e.target.value);
   };
 
+
+
   const filteredTasks = taskList.filter((task) => {
     return task.name.toLowerCase().includes(searchInput.toLowerCase());
   });
@@ -64,21 +71,7 @@ const TaskList = () => {
       </div>
       {filteredTasks.map((task) => {
         return (
-          <div key={task.id}>
-            <h1>{task.name}</h1>
-
-            <button onClick={(e) => {
-                e.preventDefault();
-                deleteTask(task);}}> Delete
-            </button>
-
-            <button onClick={() => {
-                editTask(task);}}> Update
-            </button>
-
-            {/* build mark as complete  */}
-            
-          </div>
+            <Task task={task} deleteTask={deleteTask} editTask={editTask}/>
         );
       })}
       {editing && (
