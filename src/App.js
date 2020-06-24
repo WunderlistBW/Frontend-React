@@ -20,7 +20,6 @@ export default function App() {
         <PrivateRoute path="/dashboard" component={Dashboard} />
 
         <Route path="/login">
-          
           <Login />
         </Route>
         <Route path="/signup">
