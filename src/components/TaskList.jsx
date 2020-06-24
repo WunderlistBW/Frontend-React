@@ -41,7 +41,8 @@ const TaskList = () => {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(setEditing(false))
   };
 
   const handleSearchInput = (e) => {
@@ -63,7 +64,9 @@ const TaskList = () => {
       </div>
       {filteredTasks.map((task) => {
         return (
-          <div>
+          <div key={task.id}>
+            <h1>{task.name}</h1>
+
             <button onClick={(e) => {
                 e.preventDefault();
                 deleteTask(task);}}> Delete
@@ -73,16 +76,42 @@ const TaskList = () => {
                 editTask(task);}}> Update
             </button>
 
-            {editing && (
-              <form onSubmit={saveUpdate}>
-                {/* use task form as model for this form - make sure to match shape of object used above for taskToEdit */}
-
-                <button onClick={() => setEditing(false)}>Cancel</button>
-              </form>
-            )}
+            {/* build mark as complete  */}
+            
           </div>
         );
       })}
+      {editing && (
+              <form onSubmit={saveUpdate}>
+                {/* use task form as model for this form - make sure to match shape of object used above for taskToEdit */}
+
+                <label htmlFor='name'>
+                        Task Name
+                        <input
+                            type='text'
+                            name='name'
+                            value={taskToEdit.name}
+                            onChange={e => {
+                                setTaskToEdit({...taskToEdit, name: e.target.value})
+                            }}
+                        />
+                    </label>
+
+                    <label htmlFor='endOn'>
+                        Due Date
+                        <input
+                            type='date'
+                            name='endOn'
+                            value={taskToEdit.endOn}
+                            onChange={e => {
+                                setTaskToEdit({...taskToEdit, endOn: e.target.value})
+                            }}
+                        />
+                    </label>
+                <button onClick={saveUpdate}>Save Updates</button>
+                <button onClick={() => setEditing(false)}>Cancel</button>
+              </form>
+            )}
     </>
   );
 };

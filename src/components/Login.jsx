@@ -102,8 +102,9 @@ export default function Login() {
             </div>
             <div className="form-group">
                 <div className="col-sm-offset-2 col-sm-5">
-                    <Button type="submit" className="btn btn-default" disabled={disabled}>Sign In</Button>
+                    <Button type="submit" className="btn btn-default" disabled={disabled} onClick={onSubmit}>Sign In</Button>
                     <p>Not registered? Sign in <Link to="/signup">Here</Link></p>
+
                 </div>
             </div>
         </LoginFormStyling>
