@@ -64,6 +64,7 @@ export default function App() {
     axiosWithAuth()
       .post("/api/auth/login", newLogin)
       .then((res) => {
+        console.log(res)
         window.localStorage.setItem("token", res.data.token);
         push("/dashboard");
       })
