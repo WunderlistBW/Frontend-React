@@ -3,7 +3,7 @@ import axios from 'axios';
 const axiosWithAuth = () => {
 // getting token from localstorage
 const token = window.localStorage.getItem('token');
-
+console.log(token)
 return axios.create({
 
     headers: {
