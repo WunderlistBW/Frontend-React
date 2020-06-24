@@ -21,7 +21,6 @@ export default function Login() {
    
     const { push } = useHistory(); 
 
-  // const [loginInfo, setLoginInfo] = useState([])
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initalFormErrors);
   const [disabled, setDisabled] = useState(false);
@@ -88,6 +87,7 @@ export default function Login() {
             </div>
             <Image src="assets/logo_w.png"/>
             <div className="form-group">
+               
                 <label className="control-label col-sm-2" for="username">Username:</label>
                 <div className="col-sm-10">
                     <input type="text" className="form-control" id="username" placeholder="Enter username" value={formValues.username} name="username" onChange={onInputChange}/>
@@ -104,7 +104,6 @@ export default function Login() {
                 <div className="col-sm-offset-2 col-sm-5">
                     <Button type="submit" className="btn btn-default" disabled={disabled} onClick={onSubmit}>Sign In</Button>
                     <p>Not registered? Sign in <Link to="/signup">Here</Link></p>
-
                 </div>
             </div>
         </LoginFormStyling>
