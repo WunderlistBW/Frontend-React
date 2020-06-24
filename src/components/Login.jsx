@@ -35,7 +35,7 @@ export default function Login(props) {
             </div>
             <div className="form-group">
                 <div className="col-sm-offset-2 col-sm-5">
-                    <Button type="submit" className="btn btn-default" disabled={disabled}>Sign In</Button>
+                    <Button type="submit" className="btn btn-default" disabled={disabled} onClick={onSubmit}>Sign In</Button>
                 </div>
             </div>
         </LoginFormStyling>
