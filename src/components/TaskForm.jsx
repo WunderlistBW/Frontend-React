@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import React, { useState, useContext } from "react";
 import Modal from "react-modal";
-import axiosWithAuth from '../utils/axiosWithAuth'; 
-import { TaskContext } from '../contexts/TaskContext'; 
+import axiosWithAuth from "../utils/axiosWithAuth";
+import { TaskContext } from "../contexts/TaskContext";
 import TaskFormStyling from "../stylingComponents/TaskFormStyling";
 import Button from "../stylingComponents/Button";
 
-function TaskForm() {
+Modal.setAppElement("#root");
 
+function TaskForm() {
     const { setRefresh } = useContext(TaskContext);
 
     const [formState, setFormState] = useState({
@@ -36,7 +36,7 @@ function TaskForm() {
 
     const formSubmit = (e) => {
         e.preventDefault();
-        console.log(formState); 
+        console.log(formState);
         axiosWithAuth()
             .post("/api/tasks", formState)
             .then((res) => {
@@ -50,9 +50,12 @@ function TaskForm() {
                     days: null,
                 });
                 setModalIsOpen(false);
-                setRefresh(true); 
+                setRefresh(true);
             })
-            .catch((err) => {console.log(err.response); console.log(formState)});
+            .catch((err) => {
+                console.log(err.response);
+                console.log(formState);
+            });
     };
 
     return (
@@ -63,13 +66,21 @@ function TaskForm() {
                 onRequestClose={() => setModalIsOpen(false)}
                 shouldCloseOnOverlayClick={false}
             >
-                <TaskFormStyling className="form-horizontal" onSubmit={formSubmit}>
-                    <div className="form-group">
-                        <label className="control-label col-sm-2" htmlFor='name'>Task Name:</label>
-                        <div className="col-sm-8">
+                <TaskFormStyling
+                    className='form-horizontal'
+                    onSubmit={formSubmit}
+                >
+                    <div className='form-group'>
+                        <label
+                            className='control-label col-sm-2'
+                            htmlFor='name'
+                        >
+                            Task Name:
+                        </label>
+                        <div className='col-sm-8'>
                             <input
-                                id="name"
-                                className="form-control"
+                                id='name'
+                                className='form-control'
                                 type='text'
                                 name='name'
                                 value={formState.name}
@@ -77,10 +88,21 @@ function TaskForm() {
                             />
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label className="control-label col-sm-2"htmlFor='days'>Day of Week:</label>
-                        <div className="col-sm-5">
-                            <select className="form-control" name='days' id='days' onChange={inputChange}>
+                    <div className='form-group'>
+                        <label
+                            className='control-label col-sm-2'
+                            htmlFor='days'
+                        >
+                            Day of Week:
+                        </label>
+                        <div className='col-sm-5'>
+                            <select
+                                className='form-control'
+                                name='days'
+                                id='days'
+                                onChange={inputChange}
+                            >
+                                <option value='null'>Choose an option</option>
                                 <option value='0'>Sundays</option>
                                 <option value='1'>Mondays</option>
                                 <option value='2'>Tuesdays</option>
@@ -91,33 +113,45 @@ function TaskForm() {
                             </select>
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label className="control-label col-sm-2" htmlFor='endOn'>Due Date:</label>
-                            <div className="col-sm-10">
-                                <input
-                                    id="endOn"
-                                    type='date'
-                                    name='endOn'
-                                    value={formState.endOn || ""}
-                                    onChange={inputChange}
-                                />
-                            </div>    
+                    <div className='form-group'>
+                        <label
+                            className='control-label col-sm-2'
+                            htmlFor='endOn'
+                        >
+                            Due Date:
+                        </label>
+                        <div className='col-sm-10'>
+                            <input
+                                id='endOn'
+                                type='date'
+                                name='endOn'
+                                value={formState.endOn || ""}
+                                onChange={inputChange}
+                            />
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-5">
-                            <div class="checkbox">
-                                <label><input type="checkbox" name='isRepeated' value={formState.isRepeated} onChange={inputChange} />Remember me</label> 
+                    <div class='form-group'>
+                        <div class='col-sm-offset-2 col-sm-5'>
+                            <div class='checkbox'>
+                                <label>
+                                    <input
+                                        type='checkbox'
+                                        name='isRepeated'
+                                        value={formState.isRepeated}
+                                        onChange={inputChange}
+                                    />
+                                    Repeat
+                                </label>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-5">
+                    <div class='form-group'>
+                        <div class='col-sm-offset-2 col-sm-5'>
                             <Button>Create Task</Button>
                         </div>
-                    </div> 
+                    </div>
                 </TaskFormStyling>
             </Modal>
-            {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
         </div>
     );
 }
