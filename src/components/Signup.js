@@ -35,53 +35,53 @@ export const SignUpForm = () => {
 
   return (
     <form className="login" onSubmit={handleSubmit}>
-      <h1>Please Sign Up Here</h1>
+      <h1>Sign Up </h1>
       <label>
-        Enter Username:
+         Username:
         <input
           type="text"
           name="username"
-          placeholder="enter username here"
+          placeholder="Username"
           value={signUpInput.username || ''}
           onChange={handleChange}
         />
       </label>
       <label>
-        Enter First Name:
+        First Name:
         <input
           type="text"
           name="firstname"
-          placeholder="Enter First Name Here"
+          placeholder="First Name"
           value={signUpInput.firstname || ''}
           onChange={handleChange}
         />
       </label>
       <label>
-        Enter Last Name:
+        Last Name:
         <input
           type="text"
           name="lastname"
-          placeholder="Enter Last Name Here"
+          placeholder="Last Name"
           value={signUpInput.lastname || ''}
           onChange={handleChange}
         />
       </label>
       <label>
-        Enter Email Here:
+        Email Here:
         <input
           type="text"
           name="email"
-          placeholder="Enter Email Here"
+          placeholder="Email Here"
           value={signUpInput.email || ''}
           onChange={handleChange}
         />
       </label>
       <label>
-        Enter Password Here:
+        Password Here:
         <input
           type="password"
           name="password"
-          placeholder="Enter Password Here"
+          placeholder="Password"
           value={signUpInput.password || ''}
           onChange={handleChange}
         />
