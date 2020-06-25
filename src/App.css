@@ -38,3 +38,38 @@
 }
 
 
+.login {
+  width: 80%;
+  margin: 2% auto;
+  padding-bottom: 3%;
+  height: 90vh;
+  background-color: #e6f7ff;
+  border: 3px double black;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+h1 {
+  font-size: 4rem;
+}
+
+label {
+  font-size: 1.8rem;
+  margin: 1%;
+}
+
+input {
+  font-size: 1.8rem;
+  text-align: center;
+  background-color: white;
+  margin: 2%;
+  border-radius: 30px;
+}
+button {
+  width: 30%;
+  margin: 1% auto;
+  font-size: 1.5rem;
+  border-radius: 30px;
+  background-color: white;
+}
