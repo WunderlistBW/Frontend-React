@@ -20,7 +20,6 @@ const initalFormErrors = {
 export default function Login() {
     const { push } = useHistory();
 
-    // const [loginInfo, setLoginInfo] = useState([])
     const [formValues, setFormValues] = useState(initialFormValues);
     const [formErrors, setFormErrors] = useState(initalFormErrors);
     const [disabled, setDisabled] = useState(false);
@@ -104,7 +103,7 @@ export default function Login() {
                 <div className='col-sm-10'>
                     <input
                         type='password'
-                        class='form-control'
+                        className='form-control'
                         id='pwd'
                         placeholder='Enter password'
                         value={formValues.password}

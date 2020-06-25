@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-
 import axiosWithAuth from "../utils/axiosWithAuth";
 import TaskList from "./TaskList";
 import { TaskContext } from "../contexts/TaskContext";
-
 import TaskForm from "../components/TaskForm";
+import H2 from "../stylingComponents/H2";
 
 const Dashboard = () => {
     const [taskList, setTaskList] = useState([]);
@@ -25,7 +24,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <h1>Your Tasks</h1>
+            <H2>Your Tasks</H2>
             <TaskContext.Provider value={{ taskList, setRefresh }}>
                 <TaskList />
             </TaskContext.Provider>

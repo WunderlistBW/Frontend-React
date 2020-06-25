@@ -3,6 +3,12 @@ import React, { useContext, useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 import { TaskContext } from "../contexts/TaskContext";
+import Button from "../stylingComponents/Button";
+import SearchBar from "../stylingComponents/SearchBar";
+
+import Task from "./Task";
+
+import "./component.css";
 
 const TaskList = () => {
     // need to add mark as complete + clear completed functionality
@@ -13,9 +19,6 @@ const TaskList = () => {
     const [editing, setEditing] = useState(false);
     const [taskToEdit, setTaskToEdit] = useState({}); // update this object with correct shape
     const [searchInput, setSearchInput] = useState("");
-    const [complete, setComplete] = useState(false);
-
-    let toggleComplete = () => {};
 
     const deleteTask = (task) => {
         axiosWithAuth()
@@ -58,48 +61,23 @@ const TaskList = () => {
 
     return (
         <>
-            <div className='search-bar'>
-                <input
-                    value={searchInput}
-                    placeholder='search for a task'
-                    onChange={handleSearchInput}
-                />
-            </div>
+            <SearchBar className='search-bar form-horizontal'>
+                <div className='col-sm-5'>
+                    <input
+                        className='form-control'
+                        value={searchInput}
+                        placeholder='search for a task'
+                        onChange={handleSearchInput}
+                    />
+                </div>
+            </SearchBar>
             {filteredTasks.map((task) => {
                 return (
-                    <div key={task.id}>
-                        <h1
-                            style={{
-                                textDecoration: complete ? "line-through" : "",
-                            }}
-                        >
-                            {task.name}
-                        </h1>
-
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                deleteTask(task);
-                            }}
-                        >
-                            {" "}
-                            Delete
-                        </button>
-
-                        <button
-                            onClick={() => {
-                                editTask(task);
-                            }}
-                        >
-                            {" "}
-                            Update
-                        </button>
-
-                        {/* build mark as complete  */}
-                        <button onClick={() => setComplete(!complete)}>
-                            Complete All
-                        </button>
-                    </div>
+                    <Task
+                        task={task}
+                        deleteTask={deleteTask}
+                        editTask={editTask}
+                    />
                 );
             })}
             {editing && (
@@ -135,8 +113,8 @@ const TaskList = () => {
                             }}
                         />
                     </label>
-                    <button onClick={saveUpdate}>Save Updates</button>
-                    <button onClick={() => setEditing(false)}>Cancel</button>
+                    <Button onClick={saveUpdate}>Save Updates</Button>
+                    <Button onClick={() => setEditing(false)}>Cancel</Button>
                 </form>
             )}
         </>
