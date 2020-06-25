@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import React, { useState, useContext } from "react";
 import Modal from "react-modal";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { TaskContext } from "../contexts/TaskContext";
@@ -16,7 +15,6 @@ function TaskForm() {
         endOn: null,
         isRepeated: false,
         days: null,
-        complete: false,
     });
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -104,6 +102,7 @@ function TaskForm() {
                                 id='days'
                                 onChange={inputChange}
                             >
+                                <option value='null'>Choose an option</option>
                                 <option value='0'>Sundays</option>
                                 <option value='1'>Mondays</option>
                                 <option value='2'>Tuesdays</option>
@@ -141,7 +140,7 @@ function TaskForm() {
                                         value={formState.isRepeated}
                                         onChange={inputChange}
                                     />
-                                    Remember me
+                                    Repeat
                                 </label>
                             </div>
                         </div>

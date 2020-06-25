@@ -8,7 +8,6 @@ import H2 from "../stylingComponents/H2";
 const Dashboard = () => {
     const [taskList, setTaskList] = useState([]);
     const [refresh, setRefresh] = useState(true);
-
     useEffect(() => {
         axiosWithAuth()
             .get("/api/tasks")
@@ -21,14 +20,12 @@ const Dashboard = () => {
             })
             .finally(setRefresh(false));
     }, [refresh]);
-
     return (
         <>
             <H2>Your Tasks</H2>
             <TaskContext.Provider value={{ taskList, setRefresh }}>
                 <TaskList />
             </TaskContext.Provider>
-
             <TaskContext.Provider value={{ setRefresh }}>
                 <TaskForm />
             </TaskContext.Provider>
