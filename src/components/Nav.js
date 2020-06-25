@@ -5,6 +5,7 @@ import NavStyling from "../stylingComponents/NavStyling";
 import NavLink from "../stylingComponents/NavLink";
 import ATags from "../stylingComponents/ATags";
 
+
 export default function Nav() {
     return (
     <Div class="navigation">
