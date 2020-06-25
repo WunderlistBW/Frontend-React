@@ -3,6 +3,8 @@ import React, { useContext, useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 import { TaskContext } from "../contexts/TaskContext";
+import Button from "../stylingComponents/Button";
+import SearchBar from "../stylingComponents/SearchBar";
 
 const TaskList = () => {
   // need to add mark as complete + clear completed functionality
@@ -55,13 +57,16 @@ const TaskList = () => {
 
   return (
     <>
-      <div className="search-bar">
-        <input
-          value={searchInput}
-          placeholder="search for a task"
-          onChange={handleSearchInput}
-        />
-      </div>
+      <SearchBar className="search-bar form-horizontal">
+        <div className="col-sm-5">
+          <input
+            className="form-control"
+            value={searchInput}
+            placeholder="search for a task"
+            onChange={handleSearchInput}
+          />
+        </div>
+      </SearchBar>
       {filteredTasks.map((task) => {
         return (
           <div key={task.id}>
@@ -108,8 +113,8 @@ const TaskList = () => {
                             }}
                         />
                     </label>
-                <button onClick={saveUpdate}>Save Updates</button>
-                <button onClick={() => setEditing(false)}>Cancel</button>
+                <Button onClick={saveUpdate}>Save Updates</Button>
+                <Button onClick={() => setEditing(false)}>Cancel</Button>
               </form>
             )}
     </>

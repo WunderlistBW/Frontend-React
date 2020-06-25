@@ -7,4 +7,7 @@ export default styled.button`
     border-radius: 8px;
     color: #261C52;
     background-color: #FFD33A;
+    &:focus { 
+        outline:0;
+    }
 `

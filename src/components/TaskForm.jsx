@@ -3,6 +3,8 @@ import axios from "axios";
 import Modal from "react-modal";
 import axiosWithAuth from '../utils/axiosWithAuth'; 
 import { TaskContext } from '../contexts/TaskContext'; 
+import TaskFormStyling from "../stylingComponents/TaskFormStyling";
+import Button from "../stylingComponents/Button";
 
 function TaskForm() {
 
@@ -55,55 +57,65 @@ function TaskForm() {
 
     return (
         <div className='TaskForm'>
-            <button onClick={() => setModalIsOpen(true)}>Create Task</button>
+            <Button onClick={() => setModalIsOpen(true)}>Create Task</Button>
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
                 shouldCloseOnOverlayClick={false}
             >
-                <form onSubmit={formSubmit}>
-                    <label htmlFor='name'>
-                        Task Name
-                        <input
-                            type='text'
-                            name='name'
-                            value={formState.name}
-                            onChange={inputChange}
-                        />
-                    </label>
-                    <label htmlFor='isRepeated'>
-                        Repeated
-                        <input
-                            type='checkbox'
-                            name='isRepeated'
-                            value={formState.isRepeated}
-                            onChange={inputChange}
-                        />
-                    </label>
-                    <label htmlFor='days'>
-                        <select name='days' id='days' onChange={inputChange}>
-                            <option value='0'>Sundays</option>
-                            <option value='1'>Mondays</option>
-                            <option value='2'>Tuesdays</option>
-                            <option value='3'>Wednesdays</option>
-                            <option value='4'>Thursdays</option>
-                            <option value='5'>Fridays</option>
-                            <option value='6'>Saturdays</option>
-                        </select>
-                    </label>
-
-                    <label htmlFor='endOn'>
-                        Due Date
-                        <input
-                            type='date'
-                            name='endOn'
-                            value={formState.endOn || ""}
-                            onChange={inputChange}
-                        />
-                    </label>
-
-                    <button>Create Task</button>
-                </form>
+                <TaskFormStyling className="form-horizontal" onSubmit={formSubmit}>
+                    <div className="form-group">
+                        <label className="control-label col-sm-2" htmlFor='name'>Task Name:</label>
+                        <div className="col-sm-8">
+                            <input
+                                id="name"
+                                className="form-control"
+                                type='text'
+                                name='name'
+                                value={formState.name}
+                                onChange={inputChange}
+                            />
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="control-label col-sm-2"htmlFor='days'>Day of Week:</label>
+                        <div className="col-sm-5">
+                            <select className="form-control" name='days' id='days' onChange={inputChange}>
+                                <option value='0'>Sundays</option>
+                                <option value='1'>Mondays</option>
+                                <option value='2'>Tuesdays</option>
+                                <option value='3'>Wednesdays</option>
+                                <option value='4'>Thursdays</option>
+                                <option value='5'>Fridays</option>
+                                <option value='6'>Saturdays</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="control-label col-sm-2" htmlFor='endOn'>Due Date:</label>
+                            <div className="col-sm-10">
+                                <input
+                                    id="endOn"
+                                    type='date'
+                                    name='endOn'
+                                    value={formState.endOn || ""}
+                                    onChange={inputChange}
+                                />
+                            </div>    
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-5">
+                            <div class="checkbox">
+                                <label><input type="checkbox" name='isRepeated' value={formState.isRepeated} onChange={inputChange} />Remember me</label> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-5">
+                            <Button>Create Task</Button>
+                        </div>
+                    </div> 
+                </TaskFormStyling>
             </Modal>
             {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
         </div>
